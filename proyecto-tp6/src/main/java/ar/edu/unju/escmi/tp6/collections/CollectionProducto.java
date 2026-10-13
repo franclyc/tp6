@@ -6,9 +6,9 @@ import java.util.List;
 import ar.edu.unju.escmi.tp6.dominio.Producto;
 
 public class CollectionProducto {
-	 public static List<Producto> productos = new ArrayList<Producto>();
+	 public static List<Producto> productos = new ArrayList<Producto>();//esta lista es para poder guardar los productos en memoria y poder buscarlos por su codigo
 
-	 public static void precargarProductos() {
+	 public static void precargarProductos() {//este metodo es para poder precargar los productos en la lista de productos, si la lista esta vacia
 	        if (productos.isEmpty()) {
 	            productos = new ArrayList<Producto>();
 	            productos.add(new Producto(1111, "Aire Acondicionado Split On/Off 2750W FC Hisense", 220000, "Argentina"));
@@ -33,51 +33,51 @@ public class CollectionProducto {
 	                    "Argentina"));
 	            productos.add(new Producto(5114, "Televisor UHD 4K Smart TV Samsung", 195000, "Argentina"));
 	        }
-	    }
+	    }//este metodo es para poder precargar los productos en la lista de productos, si la lista esta vacia
 
-	   public static void agregarProducto(Producto producto) {
+	   public static void agregarProducto(Producto producto) {//este metodo es para poder agregar un producto a la lista de productos
 	        
 	    	try {
-	    		if (productos.isEmpty()) {
-	                productos.add(producto);
+	    		if (productos.isEmpty()) {//	este if es para poder verificar si la lista de productos esta vacia, si esta vacia agrega el producto a la lista
+	                productos.add(producto);//	este metodo es para poder agregar un producto a la lista de productos
 	            } else {
-	                long controlCodigo = producto.getCodigo();
+	                long controlCodigo = producto.getCodigo();// este objeto es para poder guardar el codigo del producto que se quiere agregar a la lista de productos
 	                boolean band = true;
 
-	                for (Producto pro : productos) {
+	                for (Producto pro : productos) {// este for es para poder recorrer la lista de productos y verificar si el codigo del producto que se quiere agregar ya existe en la lista de productos
 	                    if (band) {
 	                        if (pro.getCodigo() == controlCodigo) {
 	                            System.out.println("\nYa existe un producto con ese código");
-	                            band = false;
+	                            band = false;// este booleano es para poder controlar si el codigo del producto que se quiere agregar ya existe en la lista de productos, si existe no agrega el producto a la lista
 	                        }
 	                    }
 	                }
-	                if (band) {
-	                    productos.add(producto);
+	                if (band) {// este if es para poder verificar si el codigo del producto que se quiere agregar ya existe en la lista de productos, si no existe agrega el producto a la lista
+	                    productos.add(producto);// este metodo es para poder agregar un producto a la lista de productos
 	                }
 
 	            }
-			} catch (Exception e) {
+			} catch (Exception e) {// este catch es para poder capturar cualquier excepcion que pueda ocurrir al agregar un producto a la lista de productos
 				System.out.println("\nNO SE PUEDE GUARDAR EL PRODUCTO");
 			}
 	    	
 	    }
 
-	    public static Producto buscarProducto(long codigo) {
-	        Producto productoEncontrado = null;
+	    public static Producto buscarProducto(long codigo) {// este metodo es para poder buscar un producto por su codigo, si no lo encuentra devuelve null
+	        Producto productoEncontrado = null;// este objeto es para poder guardar el producto encontrado, si no se encuentra el producto se devuelve null
 	        
 	        try {
-	        	if (!productos.isEmpty()) {
-	                for (Producto pro : productos) {
-	                    if (pro.getCodigo() == codigo) {
+	        	if (!productos.isEmpty()) {// este if es para poder verificar si la lista de productos no esta vacia, si esta vacia devuelve null
+	                for (Producto pro : productos) {// este for es para poder recorrer la lista de productos y buscar el producto por su codigo
+	                    if (pro.getCodigo() == codigo) {// este if es para poder verificar si el codigo del producto es igual al codigo que se esta buscando
 	                        productoEncontrado = pro;
 	                    }
 	                }
 	            }
-			} catch (Exception e) {
+			} catch (Exception e) {// este catch es para poder capturar cualquier excepcion que pueda ocurrir al buscar un producto por su codigo
 				return null;
 			}
 	        
-	        return productoEncontrado;
+	        return productoEncontrado;// este return es para devolver el producto encontrado por su codigo, si no se encuentra devuelve null
 	    }
 }
