@@ -1,26 +1,67 @@
+// Indica el paquete al que pertenece la clase.
 package ar.edu.unju.escmi.tp6.main;
 
+// Importa LocalDate para trabajar con fechas.
 import java.time.LocalDate;
+
+// Importa ArrayList para crear listas.
 import java.util.ArrayList;
+
+// Importa la interfaz List para declarar listas.
 import java.util.List;
+
+// Importa Scanner para leer datos ingresados por teclado.
 import java.util.Scanner;
 
+// Importa la colección que administra clientes.
 import ar.edu.unju.escmi.tp6.collections.CollectionCliente;
+
+// Importa la colección que administra créditos.
 import ar.edu.unju.escmi.tp6.collections.CollectionCredito;
+
+// Importa la colección que administra facturas.
 import ar.edu.unju.escmi.tp6.collections.CollectionFactura;
+
+// Importa la colección que administra productos.
 import ar.edu.unju.escmi.tp6.collections.CollectionProducto;
+
+// Importa la colección que administra el stock.
 import ar.edu.unju.escmi.tp6.collections.CollectionStock;
+
+// Importa la colección que administra tarjetas de crédito.
 import ar.edu.unju.escmi.tp6.collections.CollectionTarjetaCredito;
+
+// Importa la clase Cliente.
 import ar.edu.unju.escmi.tp6.dominio.Cliente;
+
+// Importa la clase Credito.
 import ar.edu.unju.escmi.tp6.dominio.Credito;
+
+// Importa la clase Detalle.
 import ar.edu.unju.escmi.tp6.dominio.Detalle;
+
+// Importa la clase Factura.
 import ar.edu.unju.escmi.tp6.dominio.Factura;
+
+// Importa la clase Producto.
 import ar.edu.unju.escmi.tp6.dominio.Producto;
+
+// Importa la clase Stock.
 import ar.edu.unju.escmi.tp6.dominio.Stock;
+
+// Importa la clase TarjetaCredito.
 import ar.edu.unju.escmi.tp6.dominio.TarjetaCredito;
+
+// Importa la excepción para un cliente no encontrado.
 import ar.edu.unju.escmi.tp6.exceptions.ClienteNoEncontradoException;
+
+// Importa la excepción para un límite de tarjeta insuficiente.
 import ar.edu.unju.escmi.tp6.exceptions.LimiteTarjetaInsuficienteException;
+
+// Importa la excepción para un monto que supera el permitido.
 import ar.edu.unju.escmi.tp6.exceptions.MontoExcedidoException;
+
+// Importa la excepción para stock insuficiente.
 import ar.edu.unju.escmi.tp6.exceptions.StockInsuficienteException;
 
 public class Main {//esta clase es para poder ejecutar el programa y probar las funcionalidades de la aplicacion
@@ -144,7 +185,6 @@ public class Main {//esta clase es para poder ejecutar el programa y probar las 
 				System.out.println("No existe un producto con ese codigo.");
 				continue;
 			}
-
 			Stock stock = CollectionStock.buscarStock(producto);
 			if (stock == null) {
 				System.out.println("El producto no tiene stock registrado.");
@@ -159,7 +199,6 @@ public class Main {//esta clase es para poder ejecutar el programa y probar las 
 				System.out.println("Stock insuficiente. Disponible: " + stock.getCantidad());
 				continue;
 			}
-
 			detalles.add(new Detalle(cantidad, producto, true));
 			stocksVendidos.add(stock);
 			cantidadesVendidas.add(cantidad);
@@ -248,3 +287,41 @@ public class Main {//esta clase es para poder ejecutar el programa y probar las 
 		}//este if es para poder verificar si se encontraron creditos del cliente, si no se encontraron se muestra un mensaje
 	}
 }
+
+
+            // Lee y guarda la opción ingresada.
+            opcion = leerOpcion();
+
+            // Inicia el bloque cuyas excepciones se controlan con catch.
+            try {
+
+switch (opcion) {
+				case 1:
+					realizarVenta();
+					break;
+				case 2:
+					consultarCompras();
+					break;
+				case 3:
+					mostrarProductos();
+					break;
+				case 4:
+					consultarStock();
+					break;
+				case 5:
+					consultarCreditos();
+					break;
+				case 6:
+					System.out.println("Hasta luego.");
+					break;
+				default:
+					System.out.println("Opcion invalida. Ingrese un numero del 1 al 6.");
+				}
+			} catch (ClienteNoEncontradoException | StockInsuficienteException | MontoExcedidoException
+					| LimiteTarjetaInsuficienteException e) {
+				System.out.println("\n" + e.getMessage());
+			}
+		} while (opcion != 6);
+		scanner.close();
+	}
+
